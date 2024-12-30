@@ -60,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "2806-memorando:build:production"
+              "buildTarget": "2806-memorando:build:production"
             },
             "development": {
-              "browserTarget": "2806-memorando:build:development"
+              "buildTarget": "2806-memorando:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -71,7 +71,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "2806-memorando:build"
+            "buildTarget": "2806-memorando:build"
           }
         },
         "test": {
