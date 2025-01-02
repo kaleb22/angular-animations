@@ -72,7 +72,8 @@
     <div
       class="lista-tarefas card-{{ tarefa.categoria }}"
       *ngFor="let tarefa of listaTarefas; let i = index"
-      (mouseover)="indexTarefa = i">
+      (mouseover)="indexTarefa = i"
+      [@focusState]="indexTarefa === i ? 'focused' : 'default'">
       <div class="info-card">
         <p class="categoria-tarefa categoria-{{ tarefa.categoria }}">
           <img
