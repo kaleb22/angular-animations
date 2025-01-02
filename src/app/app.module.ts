@@ -15,21 +15,19 @@ import { RodapeComponent } from './componentes/rodape/rodape.component';
 import { MensagemComponent } from './componentes/mensagem/mensagem.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ListaTarefasComponent,
-    CabecalhoComponent,
-    MensagemComponent,
-    RodapeComponent,
-  ],
-  bootstrap: [AppComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-  ],
-  providers: [provideHttpClient(withInterceptorsFromDi())],
+    declarations: [AppComponent],
+    bootstrap: [AppComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        ListaTarefasComponent,
+        CabecalhoComponent,
+        MensagemComponent,
+        RodapeComponent,
+    ],
+    providers: [provideHttpClient(withInterceptorsFromDi())],
 })
 export class AppModule {}

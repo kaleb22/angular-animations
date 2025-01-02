@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { TarefaService } from 'src/app/service/tarefa.service';
 import { Tarefa } from '../interface/tarefa';
+import { NgIf, NgClass, NgFor } from '@angular/common';
+import { MensagemComponent } from '../componentes/mensagem/mensagem.component';
 
 @Component({
     selector: 'app-lista-tarefas',
     templateUrl: './lista-tarefas.component.html',
     styleUrls: ['./lista-tarefas.component.css'],
-    standalone: false
+    imports: [NgIf, FormsModule, ReactiveFormsModule, NgClass, MensagemComponent, NgFor]
 })
 export class ListaTarefasComponent implements OnInit {
   listaTarefas: Tarefa[] = [];
