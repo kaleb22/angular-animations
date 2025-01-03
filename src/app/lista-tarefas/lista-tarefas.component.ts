@@ -24,7 +24,7 @@ export class ListaTarefasComponent implements OnInit {
   id: number = 0;
 
   formulario: FormGroup = this.fomBuilder.group({
-    id: [0],
+    id: ['0'],
     descricao: ['', Validators.required],
     statusFinalizado: [false, Validators.required],
     categoria: ['', Validators.required],
@@ -49,11 +49,7 @@ export class ListaTarefasComponent implements OnInit {
   }
 
   salvarTarefa() {
-    if (this.formulario.value.id) {
-      this.editarTarefa();
-    } else {
-      this.criarTarefa();
-    }
+    this.criarTarefa();
   }
 
   editarTarefa() {
@@ -63,12 +59,21 @@ export class ListaTarefasComponent implements OnInit {
   }
 
   criarTarefa() {
+    console.log('criar ', this.formulario.value);
+    if(this.listaTarefas.length > 0) {
+      const ultimaTarefa = this.listaTarefas.at(this.listaTarefas.length - 1) as Tarefa;
+      const novoId = (++ultimaTarefa.id).toString();
+      this.formulario.patchValue({id: novoId});
+    } else {
+      this.formulario.patchValue({id: '1'});
+    }
     this.service.criar(this.formulario.value).subscribe({
       complete: () => this.atualizarComponente(),
     });
   }
 
   excluirTarefa(id: number) {
+    console.log('id -> ', id);
     if (id) {
       this.service.excluir(id).subscribe({
         complete: () => this.recarregarComponente(),
