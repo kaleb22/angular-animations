@@ -14,3 +14,22 @@ export const focusState = trigger('focusState', [
     }))
   ])
 ]);
+
+export const showState = trigger('showState', [
+  transition(':enter', [
+    style({
+      opacity: 0
+    }),
+    animate(300, style({
+      opacity: 1
+    }))
+  ]),
+  transition(':leave', [
+    style({
+      opacity: 1
+    }),
+    animate(300, style({
+      opacity: 0
+    }))
+  ])
+]);

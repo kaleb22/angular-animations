@@ -6,14 +6,14 @@ import { NgIf, NgClass, NgFor } from '@angular/common';
 import { TarefaService } from 'src/app/service/tarefa.service';
 import { Tarefa } from '../interface/tarefa';
 import { MensagemComponent } from '../componentes/mensagem/mensagem.component';
-import { focusState } from '../animations';
+import { focusState, showState } from '../animations';
 
 @Component({
     selector: 'app-lista-tarefas',
     templateUrl: './lista-tarefas.component.html',
     styleUrls: ['./lista-tarefas.component.css'],
     imports: [NgIf, FormsModule, ReactiveFormsModule, NgClass, MensagemComponent, NgFor],
-    animations: [focusState]
+    animations: [focusState, showState]
 })
 export class ListaTarefasComponent implements OnInit {
   listaTarefas: Tarefa[] = [];
@@ -44,9 +44,8 @@ export class ListaTarefasComponent implements OnInit {
     return this.listaTarefas;
   }
 
-  mostrarOuEsconderFormulario() {
-    this.formAberto = !this.formAberto;
-    this.resetarFormulario();
+  mostrarFormulario() {
+    this.formAberto = true;
   }
 
   salvarTarefa() {
@@ -77,9 +76,10 @@ export class ListaTarefasComponent implements OnInit {
     }
   }
 
-  cancelar() {
+  cancelar(event: Event) {
+    event.preventDefault();
+    this.formAberto = !this.formAberto;
     this.resetarFormulario();
-    this.formAberto = false;
   }
 
   resetarFormulario() {
