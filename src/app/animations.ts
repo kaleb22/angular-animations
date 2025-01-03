@@ -33,3 +33,11 @@ export const showState = trigger('showState', [
     }))
   ])
 ]);
+
+export const checkedState = trigger('checkedState', [
+  transition('* => checked', [
+    animate('400ms ease-out', style({
+      transform: 'scale(0.4)'
+    })),
+  ])
+]);

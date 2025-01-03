@@ -87,6 +87,7 @@
         </p>
         <p class="status-tarefa">
           <button
+            [@checkedState]="(tarefa.id === id ? 'checked' : 'unchecked')"
             [ngClass]="(tarefa.statusFinalizado == true) ? 'icone-checked' : 'icone-unchecked'"
             (click)="finalizarTarefa(tarefa.id)"
             >

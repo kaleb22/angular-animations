@@ -6,14 +6,14 @@ import { NgIf, NgClass, NgFor } from '@angular/common';
 import { TarefaService } from 'src/app/service/tarefa.service';
 import { Tarefa } from '../interface/tarefa';
 import { MensagemComponent } from '../componentes/mensagem/mensagem.component';
-import { focusState, showState } from '../animations';
+import { checkedState, focusState, showState } from '../animations';
 
 @Component({
     selector: 'app-lista-tarefas',
     templateUrl: './lista-tarefas.component.html',
     styleUrls: ['./lista-tarefas.component.css'],
     imports: [NgIf, FormsModule, ReactiveFormsModule, NgClass, MensagemComponent, NgFor],
-    animations: [focusState, showState]
+    animations: [focusState, showState, checkedState]
 })
 export class ListaTarefasComponent implements OnInit {
   listaTarefas: Tarefa[] = [];
