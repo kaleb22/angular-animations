@@ -1,27 +1,41 @@
-# 2806Memorando
+# ✅ Angular Animations
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.1.
+Angular animations is a project developed to study animations using the Angular animations package. It is a simple application here you can register your daily tasks and check the ones you already done.
 
-## Development server
+## 🌟 Animations topics adressed
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+This project was originally developed using Angular v15. I also seize this opportunity to update the project using Angular's CLI schematics. I updated the project to v19 with standalone components and Bootstraping with standalone APIs.
 
-## Code scaffolding
+- How to use the Trigger method in order to trigger animations.
+- Configure the Trigger method with states.
+- Defining styles to each state.
+- Integrate the trigger to the template using property binding.
+- How to use the Transition method to animate transitions between states.
+- Apply temporary styles during the transition.
+- How to control the animation's duration using the Animate method.
+- Export animations and import them in the component's metadata.
+- Applying animations on elements that are not attached to DOM yet.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## 👌 Live preview
 
-## Build
+In construction ...
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Prerequisit to run locally
 
-## Running unit tests
+This project uses a json-server to store/retrieve the data.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Installing and running locally
 
-## Running end-to-end tests
+In order to run the project locally, you just need to download this repo and run the commands:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+To install:
 
-## Further help
+```
+npm install
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+To run:
+
+```
+npm start
+```
