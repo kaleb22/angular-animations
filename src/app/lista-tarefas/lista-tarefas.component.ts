@@ -52,21 +52,21 @@ export class ListaTarefasComponent {
   }
 
   criarTarefa() {
-    console.log('criar ', this.formulario.value);
+    let id = '1';
+
     if(this.listaTarefas.length > 0) {
       const ultimaTarefa = this.listaTarefas.at(this.listaTarefas.length - 1) as Tarefa;
-      const novoId = (++ultimaTarefa.id).toString();
-      this.formulario.patchValue({id: novoId});
-    } else {
-      this.formulario.patchValue({id: '1'});
+      id = (++ultimaTarefa.id).toString();
     }
+
+    this.formulario.patchValue({id: id});
+
     this.service.criar(this.formulario.value).subscribe({
       complete: () => this.atualizarComponente(),
     });
   }
 
   excluirTarefa(id: number) {
-    console.log('id -> ', id);
     if (id) {
       this.service.excluir(id).subscribe({
         complete: () => this.recarregarComponente(),
