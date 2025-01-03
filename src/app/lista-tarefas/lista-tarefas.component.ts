@@ -1,21 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouteReuseStrategy } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgIf, NgClass, NgFor } from '@angular/common';
+import { NgIf, NgClass, NgFor, AsyncPipe } from '@angular/common';
+import { Observable, tap } from 'rxjs';
 
 import { TarefaService } from 'src/app/service/tarefa.service';
 import { Tarefa } from '../interface/tarefa';
 import { MensagemComponent } from '../componentes/mensagem/mensagem.component';
 import { checkedStateTrigger, focusStateTrigger, showStateTrigger } from '../animations';
+import { AppRouteReuseStrategy } from '../app-route-reuse-strategy';
 
 @Component({
     selector: 'app-lista-tarefas',
     templateUrl: './lista-tarefas.component.html',
     styleUrls: ['./lista-tarefas.component.css'],
-    imports: [NgIf, FormsModule, ReactiveFormsModule, NgClass, MensagemComponent, NgFor],
-    animations: [focusStateTrigger, showStateTrigger, checkedStateTrigger]
+    imports: [NgIf, FormsModule, ReactiveFormsModule, NgClass, MensagemComponent, NgFor, AsyncPipe],
+    animations: [focusStateTrigger, showStateTrigger, checkedStateTrigger],
+    providers: [
+      { provide: RouteReuseStrategy, useClass: AppRouteReuseStrategy}
+    ]
 })
-export class ListaTarefasComponent implements OnInit {
+export class ListaTarefasComponent {
+  private service = inject(TarefaService);
+  private router = inject(Router);
+  private fomBuilder = inject(FormBuilder);
+
+  listaTarefas$: Observable<Tarefa[]> = this.service.listaTarefas$.pipe(
+    tap( (res) => this.listaTarefas = res)
+  );
   listaTarefas: Tarefa[] = [];
   formAberto: boolean = false;
   categoria: string = '';
@@ -30,19 +42,6 @@ export class ListaTarefasComponent implements OnInit {
     categoria: ['', Validators.required],
     prioridade: ['', Validators.required],
   });
-
-  constructor(
-    private service: TarefaService,
-    private router: Router,
-    private fomBuilder: FormBuilder
-  ) {}
-
-  ngOnInit(): Tarefa[] {
-    this.service.listar(this.categoria).subscribe((listaTarefas) => {
-      this.listaTarefas = listaTarefas;
-    });
-    return this.listaTarefas;
-  }
 
   mostrarFormulario() {
     this.formAberto = true;
@@ -97,7 +96,7 @@ export class ListaTarefasComponent implements OnInit {
   }
 
   recarregarComponente() {
-    this.router.navigate(['/listaTarefas']);
+    this.service.listar();
   }
 
   atualizarComponente() {
@@ -122,16 +121,16 @@ export class ListaTarefasComponent implements OnInit {
     this.id = id
     this.service.buscarPorId(id!).subscribe((tarefa) => {
       this.service.atualizarStatusTarefa(tarefa).subscribe(() => {
-        this.listarAposCheck();
+        // this.listarAposCheck();
       });
     });
   }
 
-  listarAposCheck() {
-    this.service.listar(this.categoria).subscribe((listaTarefas) => {
-      this.listaTarefas = listaTarefas;
-    });
-  }
+  // listarAposCheck() {
+  //   this.service.listar().subscribe((listaTarefas) => {
+  //     this.listaTarefas = listaTarefas;
+  //   });
+  // }
 
   habilitarBotao(): string {
     if (this.formulario.valid) {

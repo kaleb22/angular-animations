@@ -69,7 +69,7 @@
     <img src="assets/imagens/ilustracao-Tarefas.png"
         alt="Ilustração de um ambiente com mesa, computador, quadro e um vaso com planta">
   </div>
-  <div *ngIf="listaTarefas.length > 0, else semTarefas">
+  <div *ngIf="listaTarefas$ | async as listaTarefas, else semTarefas">
     <div
       class="lista-tarefas card-{{ tarefa.categoria }}"
       *ngFor="let tarefa of listaTarefas; let i = index"

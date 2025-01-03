@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, switchMap } from 'rxjs';
 
 import { Tarefa } from '../interface/tarefa';
 
@@ -11,15 +11,24 @@ export class TarefaService {
   private readonly API = 'http://localhost:3000/tarefas';
   private http = inject(HttpClient);
 
-  listar(categoria: string): Observable<Tarefa[]> {
+  private tarefaBehaviourSubject = new BehaviorSubject<string>('');
+  private tarefaBehaviourSubject$ = this.tarefaBehaviourSubject.asObservable();
+
+  listar() {
+    this.tarefaBehaviourSubject.next('');
+  }
+
+  listaTarefas$ = this.tarefaBehaviourSubject$.pipe(
+    switchMap( () => this.http.get<Tarefa[]>(this.API, this.criarHeadersParams()))
+  );
+
+  private criarHeadersParams() {
     let params = new HttpParams().appendAll({
       _sort: 'id',
       _order: 'desc',
     });
-    if (categoria) {
-      params = params.append('categoria', categoria);
-    }
-    return this.http.get<Tarefa[]>(this.API, { params });
+
+    return { params };
   }
 
   criar(tarefa: Tarefa): Observable<Tarefa> {
