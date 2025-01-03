@@ -1,6 +1,6 @@
 import { animate, state, style, transition, trigger } from "@angular/animations";
 
-export const focusState = trigger('focusState', [
+export const focusStateTrigger = trigger('focusState', [
   state('default', style({
     border: '2px solid #B2B6FF'
   })),
@@ -15,7 +15,7 @@ export const focusState = trigger('focusState', [
   ])
 ]);
 
-export const showState = trigger('showState', [
+export const showStateTrigger = trigger('showState', [
   transition(':enter', [
     style({
       opacity: 0
@@ -34,7 +34,7 @@ export const showState = trigger('showState', [
   ])
 ]);
 
-export const checkedState = trigger('checkedState', [
+export const checkedStateTrigger = trigger('checkedState', [
   transition('* => checked', [
     animate('400ms ease-out', style({
       transform: 'scale(0.4)'
