@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgIf, NgClass, NgFor } from '@angular/common';
 
 import { TarefaService } from 'src/app/service/tarefa.service';
 import { Tarefa } from '../interface/tarefa';
-import { NgIf, NgClass, NgFor } from '@angular/common';
 import { MensagemComponent } from '../componentes/mensagem/mensagem.component';
 import { focusState } from '../animations';
 
