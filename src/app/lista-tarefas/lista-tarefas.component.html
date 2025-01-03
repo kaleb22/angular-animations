@@ -1,12 +1,13 @@
 <section class="criar-tarefa">
   <div class="botao-criar">
-    <button (click)="mostrarOuEsconderFormulario()">
+    <button (click)="mostrarFormulario()">
       Criar nova tarefa
     </button>
   </div>
   <form class="formulario ff-prompt"
     [formGroup]="formulario"
-    *ngIf="formAberto">
+    *ngIf="formAberto"
+    @showState>
     <label for="descricao">Descrição da tarefa</label>
     <input required
       type="text"
@@ -55,7 +56,7 @@
           Salvar
       </button>
       <button
-        (click)="cancelar()"
+        (click)="cancelar($event)"
         class="botao-form botao-cancelar">
           Cancelar
       </button>
@@ -72,7 +73,8 @@
     <div
       class="lista-tarefas card-{{ tarefa.categoria }}"
       *ngFor="let tarefa of listaTarefas; let i = index"
-      (mouseover)="indexTarefa = i">
+      (mouseover)="indexTarefa = i"
+      [@focusState]="indexTarefa === i ? 'focused' : 'default'">
       <div class="info-card">
         <p class="categoria-tarefa categoria-{{ tarefa.categoria }}">
           <img
@@ -85,6 +87,7 @@
         </p>
         <p class="status-tarefa">
           <button
+            [@checkedState]="(tarefa.id === id ? 'checked' : 'unchecked')"
             [ngClass]="(tarefa.statusFinalizado == true) ? 'icone-checked' : 'icone-unchecked'"
             (click)="finalizarTarefa(tarefa.id)"
             >
